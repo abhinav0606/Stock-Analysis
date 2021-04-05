@@ -7,6 +7,6 @@ file_name=company+".xlsx"
 data=pd.read_excel(file_name)
 # print(data["Close"])
 # print(data["Prediction"][:-8])
-plt.plot(data["Close"][:-5])
-plt.plot(data["Prediction"][:-5])
+plt.plot(data["Close"][:-7])
+plt.plot(data["Prediction"][:-7])
 plt.show()
