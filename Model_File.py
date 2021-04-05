@@ -5,8 +5,7 @@ import matplotlib.pyplot as plt
 company=input("Enter the company name")
 file_name=company+".xlsx"
 data=pd.read_excel(file_name)
-# print(data["Close"])
-# print(data["Prediction"][:-8])
+sb.set()
 plt.plot(data["Close"][:-7])
 plt.plot(data["Prediction"][:-7])
 plt.show()
