@@ -4,7 +4,7 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
 Scaler=MinMaxScaler(feature_range=(0,1))
-dataset=pd.read_excel("TCS.NS.xlsx")
+dataset=pd.read_excel("RELIANCE.NS.xlsx")
 dataset["Date"]=pd.to_datetime(dataset.Date,format="%Y-%m-%d")
 dataset.index=dataset["Date"]
 dataset1=pd.DataFrame(index=range(0,len(dataset)),columns=["Date","Close"])
@@ -21,7 +21,8 @@ X_train,Y_train=[],[]
 for i in range(60,len(Train)):
     X_train.append(Scaled_dataset[i-60:i,0])
     Y_train.append(Scaled_dataset[i,0])
-X_train,Y_train=np.array(X_train),np.array(X_train)
+X_train,Y_train=np.array(X_train),np.array(Y_train)
+# print(Y_train)
 # creating ANN
 ann=tf.keras.models.Sequential()
 # 1st layer
@@ -41,6 +42,7 @@ for i in range(len(Train),len(dataset1)):
 X_test=np.array(X_test)
 Train=dataset1[:2221]
 Test=dataset1[2221:]
+print(Scaler.inverse_transform(ann.predict(X_test)))
 Test["Prediction"]=Scaler.inverse_transform(ann.predict(X_test))
 rmse=np.sqrt(np.mean(np.power((np.array(Test['Close'])-np.array(Scaler.inverse_transform(ann.predict(X_test)))),2)))
 print(rmse)

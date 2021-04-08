@@ -1,8 +1,10 @@
-import pandas as pd
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
+import tensorflow as tf
 from sklearn.preprocessing import MinMaxScaler
 Scaler=MinMaxScaler(feature_range=(0,1))
+model=tf.keras.models.load_model("ANN_MODEL.h5")
 dataset=pd.read_excel("RELIANCE.NS.xlsx")
 dataset["Date"]=pd.to_datetime(dataset.Date,format="%Y-%m-%d")
 dataset.index=dataset["Date"]
@@ -16,11 +18,6 @@ dataset2=dataset1.values
 Train=dataset2[:2221,:]
 Test=dataset2[2221:,:]
 Scaled_dataset=Scaler.fit_transform(dataset2)
-X_train,Y_train=[],[]
-for i in range(60,len(Train)):
-    X_train.append(Scaled_dataset[i-60:i,0])
-    Y_train.append(Scaled_dataset[i,0])
-X_train,Y_train=np.array(X_train),np.array(Y_train)
 X_test=[]
 Y_test=[]
 for i in range(len(Train),len(dataset1)):
@@ -29,13 +26,23 @@ for i in range(len(Train),len(dataset1)):
 X_test=np.array(X_test)
 Train=dataset1[:2221]
 Test=dataset1[2221:]
-from sklearn.linear_model import LinearRegression,LogisticRegression
-LR=LinearRegression()
-LR.fit(X_train,Y_train)
-Test["Prediction"]=Scaler.inverse_transform(LR.predict(X_test).reshape(-1,1))
+Test["Prediction"]=Scaler.inverse_transform(model.predict(X_test).reshape(-1,1))
+rmse=np.sqrt(np.mean(np.power((np.array(Test['Close'])-np.array(Scaler.inverse_transform(model.predict(X_test)))),2)))
+print(rmse)
+plt.title("TCS-STOCK ANALYSIS WITH ANN")
 # plt.plot(Train["Close"])
-
-plt.title("Linear Regression-->Analysis of Stock--Input=(Previous 60 values)")
 plt.plot(Test[["Close","Prediction"]])
-plt.legend(["Real Value","Predicted Value"])
 plt.show()
+# predict_new_value=dataset1["Close"][:-31:-1].values
+# predict_new_value=np.reshape(predict_new_value,(-1,1))
+# predict_new_value=Scaler.transform(predict_new_value)
+# values=[]
+# for i in predict_new_value:
+#     values.append(i[0])
+# values=np.array(values)
+# values=values.reshape(1,-1)
+# print(values.shape)
+# print(X_test.shape)
+# print(Scaler.inverse_transform(model.predict(values)))
+# print(Scaler.inverse_transform(values))
+# print(Scaler.inverse_transform(model.predict(X_test)))

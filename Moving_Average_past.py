@@ -45,8 +45,5 @@ plt.title(f"Linear Regression-------Past Data   {rmse}")
 plt.plot(Train["Close"])
 plt.plot(Test[["Close","Linear_R"]])
 plt.show()
-
-
-
 # From this above program it is clear that based on the average of the past data
 # and applying linear regression the plots are not that much accurate
