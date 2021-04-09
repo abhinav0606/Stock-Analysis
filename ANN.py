@@ -26,9 +26,9 @@ X_train,Y_train=np.array(X_train),np.array(Y_train)
 # creating ANN
 ann=tf.keras.models.Sequential()
 # 1st layer
-ann.add(tf.keras.layers.Dense(units=6,activation="relu"))
+ann.add(tf.keras.layers.Dense(units=20,activation="relu"))
 # 2nd layer
-ann.add(tf.keras.layers.Dense(units=6,activation="relu"))
+ann.add(tf.keras.layers.Dense(units=20,activation="relu"))
 # 3rd layer
 ann.add(tf.keras.layers.Dense(units=1))
 ann.compile(optimizer="adam",loss="mean_squared_error",metrics=["accuracy"])
@@ -47,8 +47,10 @@ Test["Prediction"]=Scaler.inverse_transform(ann.predict(X_test))
 rmse=np.sqrt(np.mean(np.power((np.array(Test['Close'])-np.array(Scaler.inverse_transform(ann.predict(X_test)))),2)))
 print(rmse)
 plt.title("TCS-STOCK ANALYSIS WITH ANN")
-plt.plot(Train["Close"])
-plt.plot(Test[["Close","Prediction"]])
+# plt.plot(Train["Close"])
+plt.scatter(Test.index[:-30:-1],Test["Close"][:-30:-1])
+# plt.plot(Test[["Close","Prediction"]])
+plt.plot(Test["Prediction"][:-30:-1])
 plt.show()
 ann.save("ANN_MODEL.h5")
 # from the ann model it is quite clear that putting previous 60 values it is giving us a quite a good result and now we will see the results with
