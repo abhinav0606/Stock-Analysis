@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
 Scaler=MinMaxScaler(feature_range=(0,1))
-dataset=pd.read_excel("RELIANCE.NS.xlsx")
+dataset=pd.read_excel("/home/abhinav/PycharmProjects/StockMarket_Prediction/MRF.NS.xlsx")
 dataset["Date"]=pd.to_datetime(dataset.Date,format="%Y-%m-%d")
 dataset.index=dataset["Date"]
 dataset1=pd.DataFrame(index=range(0,len(dataset)),columns=["Date","Close"])
