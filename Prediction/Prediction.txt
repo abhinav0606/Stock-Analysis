@@ -1,0 +1,2 @@
+Now as seen accordingly we have finally come to an analysis that Multiple linear regression and ANN has given us quite good result
+so we will predict the future 30 days values based on this prediction.

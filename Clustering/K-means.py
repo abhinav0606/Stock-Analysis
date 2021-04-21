@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 # taking in account volume and closig price into account
+# https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/
 data=pd.read_excel("/home/abhinav/PycharmProjects/StockMarket_Prediction/MRF.NS.xlsx")
 X=data.iloc[:,[4,5]].values
 from sklearn.cluster import KMeans
