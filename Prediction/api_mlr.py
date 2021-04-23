@@ -8,6 +8,7 @@ Scaler=MinMaxScaler(feature_range=(0,1))
 company=input("Enter the Company name")
 number=int(input("Enter the number"))
 dataset=dt.DataReader(company,data_source="yahoo",start="2010-1-1")
+print(dataset["Close"])
 dataset.index=pd.to_datetime(dataset.index,format="%Y-%m-%d")
 dataframe=pd.DataFrame(index=range(len(dataset)),columns=["Date","Close"])
 for i in range(len(dataset)):
