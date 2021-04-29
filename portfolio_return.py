@@ -10,7 +10,7 @@ for i in portfolio:
     dataframe[i]=dt.DataReader(i,data_source="yahoo",start="2010-1-1")["Adj Close"]
 normal_100=(dataframe/dataframe.iloc[0])*100
 plt.plot(normal_100)
-# plt.show()
+plt.show()
 
 weights=np.array(weights)
 simple_return=(dataframe/dataframe.shift(1))-1
