@@ -182,7 +182,8 @@ body {
   <h2>Login-Stockolysis</h2>
 
   <form method="post" id="form">{%csrf_token%}
-      <a style="text-align:center" href="{% url 'social:begin' 'google-oauth2' %}"><i style="font-size:30px;text-align:center;color:blue" class="fa fa-google"></i></a>&nbsp;&nbsp;
+      <a style="text-align:center" href="{% url 'social:begin' 'facebook' %}"><i style="font-size:30px;text-align:center;color:blue" class="fa fa-facebook"></i></a>&nbsp;&nbsp;
+            <a style="text-align:center" href="{% url 'social:begin' 'google-oauth2' %}"><i style="font-size:30px;text-align:center;color:blue" class="fa fa-google"></i></a>&nbsp;
     <p style="color:white">or</p>
       <div class="user-box">
       <input type="text" name="usernamel" id="usernamel" required="">

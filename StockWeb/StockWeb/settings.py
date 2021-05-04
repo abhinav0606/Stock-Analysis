@@ -130,8 +130,8 @@ USE_TZ = True
 ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-SOCIAL_AUTH_FACEBOOK_KEY = '547099509609397'        # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = '4277ce90e0900691fc2782e1602d64cd'  # App Secret
+SOCIAL_AUTH_FACEBOOK_KEY = '815307425748240'        # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '994bca693d24b85914010d1f83238eb7'  # App Secret
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '77873868935-hqrlchrsguaepou83lpkl7p9m1fjddsf.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'Sl7CFdygFFGtGiKWW8aj1fWT'
 # Static files (CSS, JavaScript, Images)
