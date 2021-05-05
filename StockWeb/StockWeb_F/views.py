@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import Register
 from django.contrib.auth import authenticate
+from .sendmail import send
 import matplotlib.pyplot as plt
 import io
 import urllib,base64
@@ -15,7 +16,7 @@ def main(request):
     if str(request.user)=="StocksW":
         logout(request)
         return HttpResponseRedirect("/login")
-    return HttpResponse("Hello Everyone")
+    return render(request,"main_page.html")
 def signin(request):
     social_login=list(User.objects.all())
     normal_login=list(Register.objects.all())
@@ -42,7 +43,7 @@ def signin(request):
                 if nt!="":
                     return HttpResponseRedirect(nt)
                 else:
-                    return HttpResponse(f"Hello Everyone {request.user}")
+                    return HttpResponseRedirect("/")
             else:
                 return render(request,"login.html",{"message":"Incorrect Password"})
         else:
@@ -86,6 +87,7 @@ def signup(request):
                 U=User.objects.create_user(username,email,password)
                 U.first_name=Name
                 U.save()
+                send(Name,email)
                 return HttpResponseRedirect("/login")
     return render(request,"registration.html",{"message":""})
 
@@ -114,3 +116,4 @@ def signoff(request):
         return HttpResponseRedirect("/login")
     else:
         return HttpResponseRedirect("/login")
+
