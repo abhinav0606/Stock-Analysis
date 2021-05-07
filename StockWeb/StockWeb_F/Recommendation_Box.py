@@ -5,7 +5,7 @@ def bse_nse(company):
     else:
         if ".BO" in company:
             upated_name=company.split(".")[0]
-            dataset=pd.read_csv("../StockWeb/StockWeb_F/Equity.csv")
+            dataset=pd.read_csv("Equity.csv")
             dt=dataset.groupby("Group").groups
             group=(dataset[dataset['Security Id']==upated_name]["Group"]).values[0]
             indexy=(dataset[dataset['Security Id']==upated_name].index).values[0]

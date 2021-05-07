@@ -11,6 +11,7 @@ from .sendmail import send
 import matplotlib.pyplot as plt
 import io
 import urllib,base64
+from .Recommendation_Box import bse_nse
 @login_required(login_url="/login")
 def main(request):
     if str(request.user)=="StocksW":

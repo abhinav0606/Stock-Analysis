@@ -126,4 +126,5 @@ def prediction(name):
     D["Plot4"] =uri4
     D["Upcoming_Pred"]=df["Prediction"]
     print(D)
-prediction("INDUSINDBK.NS")
+    plt.show()
+prediction("INFY.NS")
