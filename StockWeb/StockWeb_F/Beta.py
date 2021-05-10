@@ -20,5 +20,5 @@ def beta(name):
     beta = cov_market / variance_market
     Beta_Stock=(beta)
     volatility_of_stock=(Beta_Stock*100)-100
-    D={"Cov Market wrt Stock":Market_Covariance,"Var Market":Market_Variance,"Beta":beta}
-beta("SBIN.NS")
+    D={"Cov Market wrt Stock":Market_Covariance,"Var Market":Market_Variance,"Beta":beta,"Volatility_of_stock":volatility_of_stock}
+    return D

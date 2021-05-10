@@ -8,10 +8,14 @@ from django.contrib.auth.models import User
 from .models import Register
 from django.contrib.auth import authenticate
 from .sendmail import send
+from pandas_datareader import data as dt
 import matplotlib.pyplot as plt
 import io
 import urllib,base64
 from .Recommendation_Box import bse_nse
+from .Security_return import simple_return
+from .Log_Return import log_return
+from .Beta import beta
 @login_required(login_url="/login")
 def main(request):
     if str(request.user)=="StocksW":
@@ -42,6 +46,8 @@ def signin(request):
                 u=authenticate(request,username=username,password=password)
                 login(request,u)
                 if nt!="":
+                    if nt=="/details/":
+                        return HttpResponseRedirect("/search/")
                     return HttpResponseRedirect(nt)
                 else:
                     return HttpResponseRedirect("/")
@@ -117,4 +123,41 @@ def signoff(request):
         return HttpResponseRedirect("/login")
     else:
         return HttpResponseRedirect("/login")
-
+# Details of stock
+@login_required(login_url='/login')
+def search(request):
+    return render(request,"search_page.html",{"message":""})
+@login_required(login_url="/login")
+def details(request):
+    recom=[]
+    if request.method=="POST":
+        search=request.POST.get("search","default")
+        if search=="":
+            return render(request,"search_page.html",{"message":"*Fill the code"})
+        try:
+            data=dt.DataReader(search,data_source="yahoo")
+        except:
+            return render(request,"search_page.html",{"message":"*We only deal with NSE and BSE stock.Please Enter the correct code"})
+        recom=bse_nse(search)
+        if type(recom)==str:
+            recom=[]
+        elif len(recom)!=5:
+            recom=[]
+        else:
+            pass
+        today_price=round(data["Close"][-1],3)
+        yesterday_price=round(data["Close"][-2],2)
+        #simple return
+        simple_mean=simple_return(search)["Overall_Mean"]
+        simple_mean_plot=simple_return(search)["Plot"]
+        #log return
+        log_mean=log_return(search)["Overall_Mean"]
+        log_mean_plot=log_return(search)["Plot"]
+        #beta
+        cov_market_wrt_stock=beta(search)['Cov Market wrt Stock']
+        variance_market=beta(search)['Var Market']
+        beta_stock=beta(search)['Beta']
+        volatility_stock=beta(search)['Volatility_of_stock']
+    return render(request,"details.html",{"recom":recom,"search":search,"today":today_price,"yesterday":yesterday_price,"Simple_mean":simple_mean,"Simple_mean_plot":simple_mean_plot,"log_mean":log_mean,"log_mean_plot":log_mean_plot,
+                                          'cov_mar_wrt_stk':cov_market_wrt_stock,'var_market':variance_market,"beta":beta_stock,"Stock_volat":volatility_stock
+                                          })

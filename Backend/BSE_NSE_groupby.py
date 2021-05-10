@@ -27,7 +27,7 @@ def bse_nse(company):
                     l.append((dataset[dataset.index==list(dt[group])[i]]["Security Id"]).values[0]+".BO")
                 return l
         else:
-            dataset=pd.read_excel("company1.xlsx")
+            dataset=pd.read_excel("NSE.xlsx")
             updated_name=company.split(".")[0]
             index=dataset[dataset['Symbol']==updated_name]["Sr. No."]
             start=0

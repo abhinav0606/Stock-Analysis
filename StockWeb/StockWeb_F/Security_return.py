@@ -4,8 +4,10 @@ import io
 import urllib
 import base64
 def simple_return(name):
-    data=dt.DataReader(name,data_source="yahoo",start="1995-1-1")
+    data=dt.DataReader(name,data_source="yahoo")
     data["Simple Return"]=(data["Adj Close"]/data["Adj Close"].shift(1))-1
+    plt.figure(1)
+    plt.clf()
     plt.title("Simple Return")
     plt.plot(data["Simple Return"])
     fig=plt.gcf()

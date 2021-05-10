@@ -5,7 +5,7 @@ def bse_nse(company):
     else:
         if ".BO" in company:
             upated_name=company.split(".")[0]
-            dataset=pd.read_csv("Equity.csv")
+            dataset=pd.read_csv("/home/abhinav/PycharmProjects/StockMarket_Prediction/StockWeb/StockWeb_F/Equity.csv")
             dt=dataset.groupby("Group").groups
             group=(dataset[dataset['Security Id']==upated_name]["Group"]).values[0]
             indexy=(dataset[dataset['Security Id']==upated_name].index).values[0]
@@ -27,7 +27,7 @@ def bse_nse(company):
                     l.append((dataset[dataset.index==list(dt[group])[i]]["Security Id"]).values[0]+".BO")
                 return l
         else:
-            dataset=pd.read_excel("company1.xlsx")
+            dataset=pd.read_excel("/home/abhinav/PycharmProjects/StockMarket_Prediction/StockWeb/StockWeb_F/NSE.xlsx")
             updated_name=company.split(".")[0]
             index=dataset[dataset['Symbol']==updated_name]["Sr. No."]
             start=0
