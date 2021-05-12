@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
     <meta charset="utf-8">
 
 </head>
@@ -120,29 +122,29 @@
 <a style="text-decoration:None;font-size:35px;" href="/logout/" class="topright glow">Log-Out</a>
 <div class="text-center">
     {% if recom %}
-  <div class="box" style="font-family: 'Dancing Script', cursive;">
+  <div class="box" style="font-family: 'Architects Daughter', cursive;">
                   <li style="text-align:center;font-size:9px;"><a style="font-size:20px;"><strong>More Stocks...</strong></a></li>
       {% for i in recom %}
       <li style="text-align:center;font-size:6px;"><a style="font-size:15px;" href="/details/{{i}}"><strong>{{i}}</strong></a></li>
       {% endfor %}
   </div>
     {% endif %}
-    <h1 class="glow" style="font-family: 'Dancing Script', cursive;">{{search}}</h1>
-<div style="background-color:grey;font-size:15px;font-family: 'Dancing Script', cursive;">
+    <h1 class="glow" style="font-family: 'Architects Daughter', cursive;">{{search}}</h1>
+<div style="background-color:grey;font-size:15px;font-family: 'Architects Daughter', cursive;">
     <br><h1>Todays Price : {{today}}</h1>
     <h1>Yesterdays Price : {{yesterday}}</h1><br>
 </div><br>
-<div style="background-color:grey;font-size:15px;font-family: 'Dancing Script', cursive;">
+<div style="background-color:grey;font-size:15px;font-family: 'Architects Daughter', cursive;">
     <br><h1>SECURITY RETURN</h1>
     <h2>Overall Mean: {{Simple_mean}}</h2>
     <img src='data:image/png;base64,{{Simple_mean_plot}}'><br>
 </div><br>
-    <div style="background-color:grey;font-size:15px;font-family: 'Dancing Script', cursive;">
+    <div style="background-color:grey;font-size:15px;font-family: 'Architects Daughter', cursive;">
     <h1>LOGARITHMIC RETURN</h1>
     <h2>Overall Mean: {{log_mean}}</h2>
     <img src='data:image/png;base64,{{log_mean_plot}}'>
 </div><br>
-        <div style="background-color:grey;font-size:15px;font-family: 'Dancing Script', cursive;">
+        <div style="background-color:grey;font-size:15px;font-family: 'Architects Daughter', cursive;">
     <br><h1>BETA OF STOCK</h1>
     <h2>Covariance of market wrt stock : {{cov_mar_wrt_stk}}</h2>
     <h2>Variance of Market : {{var_market}}</h2>
@@ -150,7 +152,7 @@
             <h2>Volatility of Stock : {{Stock_volat}}</h2><br>
             </div>
 <br>
-            <div style="background-color:grey;font-size:15px;font-family: 'Dancing Script', cursive;">
+            <div style="background-color:grey;font-size:15px;font-family: 'Architects Daughter', cursive;">
     <br><h1>OUR ALGORITHM PREDICTION</h1>
                 <h2>Today's Predicted Price : {{mlr_today}}</h2>
                 <h2>Previous Predicted Price : {{mlr_previous}}</h2>
@@ -167,14 +169,14 @@
                 <h3>{{i}} : {{j}}</h3>
 {% endfor %}<br>
             </div>
-        <div style="background-color:grey;font-size:15px;font-family: 'Dancing Script', cursive;">
+        <div style="background-color:grey;font-size:15px;font-family: 'Architects Daughter', cursive;">
     <h1>MONTE-CARLO DERIVATIVE</h1>
     <h2>D1 : {{D1}}</h2>
             <h2>D2 : {{D2}}</h2>
             <h2>BSF : {{BSF}}</h2>
             <h2>S : {{S}}</h2>
 </div><br>
-            <div style="background-color:grey;font-size:15px;font-family: 'Dancing Script', cursive;">
+            <div style="background-color:grey;font-size:15px;font-family: 'Architects Daughter', cursive;">
     <h1>MONTE-CARLO FORCAST</h1>
     <h2>Mean : {{monte_mean}}</h2>
             <h2>Variance : {{monte_var}}</h2>

@@ -9,5 +9,6 @@ urlpatterns = [
     path('search/',views.search,name='Search'),
     path('logout/',views.signoff,name="Logout"),
     path('details/',views.details,name="Details"),
-    path('details/<str:name>',views.details_single_wise,name="Single")
+    path('details/<str:name>',views.details_single_wise,name="Single"),
+    path('compare/',views.compare_input,name="Compare_input")
 ]

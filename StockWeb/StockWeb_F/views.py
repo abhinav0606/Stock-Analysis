@@ -257,3 +257,9 @@ def details_single_wise(request,name):
                                           "monte_mean":monte_mean,"monte_var":monte_var,"monte_drift":monte_drift,
                                           "monte_std":monte_std,"monte_norm":monte_norm,"monte_plot":monte_plot
                                           })
+@login_required(login_url="/login")
+def compare_input(request):
+    if request.method=="POST":
+        print(request.POST.get("search1","default"))
+        print(request.POST.get("search2", "default"))
+    return render(request,"compare.html")
