@@ -119,8 +119,6 @@ def prediction(name):
     buf.seek(0)
     string=base64.b64encode(buf.read())
     uri4=urllib.parse.quote(string)
-    print(Previous_day)
-    print(Todays)
     D={}
     D["Previous"]=Previous_day
     D["Today"]=Todays
@@ -128,7 +126,8 @@ def prediction(name):
     D["Plot2"] =uri2
     D["Plot3"] =uri3
     D["Plot4"] =uri4
-    D["Upcoming_Pred"]=df["Prediction"]
-    print(D)
-    plt.show()
-prediction("INFY.NS")
+    d={}
+    for i in list(df.index):
+        d[str(i).split(" ")[0]]=df["Prediction"][i]
+    D["Upcoming_Pred"] = d
+    return D

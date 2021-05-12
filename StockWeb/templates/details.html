@@ -129,27 +129,61 @@
     {% endif %}
     <h1 class="glow" style="font-family: 'Dancing Script', cursive;">{{search}}</h1>
 <div style="background-color:grey;font-size:15px;font-family: 'Dancing Script', cursive;">
-    <h1>Todays Price : {{today}}</h1>
-    <h1>Yesterdays Price : {{yesterday}}</h1>
-</div>
+    <br><h1>Todays Price : {{today}}</h1>
+    <h1>Yesterdays Price : {{yesterday}}</h1><br>
+</div><br>
 <div style="background-color:grey;font-size:15px;font-family: 'Dancing Script', cursive;">
-    <h1>SECURITY RETURN</h1>
+    <br><h1>SECURITY RETURN</h1>
     <h2>Overall Mean: {{Simple_mean}}</h2>
-    <img src='data:image/png;base64,{{Simple_mean_plot}}'>
-</div>
+    <img src='data:image/png;base64,{{Simple_mean_plot}}'><br>
+</div><br>
     <div style="background-color:grey;font-size:15px;font-family: 'Dancing Script', cursive;">
     <h1>LOGARITHMIC RETURN</h1>
     <h2>Overall Mean: {{log_mean}}</h2>
     <img src='data:image/png;base64,{{log_mean_plot}}'>
-</div>
+</div><br>
         <div style="background-color:grey;font-size:15px;font-family: 'Dancing Script', cursive;">
-    <h1>BETA OF STOCK</h1>
+    <br><h1>BETA OF STOCK</h1>
     <h2>Covariance of market wrt stock : {{cov_mar_wrt_stk}}</h2>
     <h2>Variance of Market : {{var_market}}</h2>
             <h2>Beta of Stock : {{beta}}</h2>
-            <h2>Volatility of Stock : {{Stock_volat}}</h2>
+            <h2>Volatility of Stock : {{Stock_volat}}</h2><br>
             </div>
-   <br><br><br><br><br> <br><br><br><br><br></div>
+<br>
+            <div style="background-color:grey;font-size:15px;font-family: 'Dancing Script', cursive;">
+    <br><h1>OUR ALGORITHM PREDICTION</h1>
+                <h2>Today's Predicted Price : {{mlr_today}}</h2>
+                <h2>Previous Predicted Price : {{mlr_previous}}</h2>
+                <h2>Our Model Prediction</h2>
+                    <img src='data:image/png;base64,{{plot1}}'><br>
+                <h2>MLR Prediction</h2>
+                <img src='data:image/png;base64,{{plot4}}'><br>
+                <h2>Overall MLR prediction</h2>
+                <img src='data:image/png;base64,{{plot3}}'><br>
+                <h2>Future 21 days Graphs</h2>
+                <img src='data:image/png;base64,{{plot4}}'><br>
+<h2>Future Predictions</h2>
+{% for i,j in mlr_upcoming.items %}
+                <h3>{{i}} : {{j}}</h3>
+{% endfor %}<br>
+            </div>
+        <div style="background-color:grey;font-size:15px;font-family: 'Dancing Script', cursive;">
+    <h1>MONTE-CARLO DERIVATIVE</h1>
+    <h2>D1 : {{D1}}</h2>
+            <h2>D2 : {{D2}}</h2>
+            <h2>BSF : {{BSF}}</h2>
+            <h2>S : {{S}}</h2>
+</div><br>
+            <div style="background-color:grey;font-size:15px;font-family: 'Dancing Script', cursive;">
+    <h1>MONTE-CARLO FORCAST</h1>
+    <h2>Mean : {{monte_mean}}</h2>
+            <h2>Variance : {{monte_var}}</h2>
+            <h2>Standard Deviation : {{monte_std}}</h2>
+            <h2>Drift : {{monte_drift}}</h2>
+                <h2>Norms : {{monte_norm}}</h2>
+                <img src='data:image/png;base64,{{monte_plot}}'><br>
+</div><br>
+   <br><br><br><br><br> <br><br></div>
 <div id="footer">
     <a href="#" style="font-size:20px;text-decoration:None;" class="fa fa-facebook glow"></a>&nbsp;&nbsp;&nbsp;
 <a href="#" style="font-size:20px;text-decoration:None" class="fa fa-instagram glow"></a>
