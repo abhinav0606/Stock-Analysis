@@ -19,6 +19,7 @@ from .Beta import beta
 from .Prediction import prediction
 from .monte_carlo_derivative import montecarlo_derivative
 from .montecarlo_forcast_stock_price import monte_forcast
+from .compare_stocks import compare
 @login_required(login_url="/login")
 def main(request):
     if str(request.user)=="StocksW":
@@ -135,6 +136,7 @@ def details(request):
     recom=[]
     if request.method=="POST":
         search=request.POST.get("search","default")
+        search=str(search).upper()
         if search=="":
             return render(request,"search_page.html",{"message":"*Fill the code"})
         try:
@@ -197,7 +199,7 @@ def details(request):
 @login_required(login_url='/login')
 def details_single_wise(request,name):
     recom=[]
-    search=name
+    search=name.upper()
     if search=="":
         return render(request,"search_page.html",{"message":"*Fill the code"})
     try:
@@ -260,6 +262,25 @@ def details_single_wise(request,name):
 @login_required(login_url="/login")
 def compare_input(request):
     if request.method=="POST":
-        print(request.POST.get("search1","default"))
-        print(request.POST.get("search2", "default"))
-    return render(request,"compare.html")
+        name1=request.POST.get("search1","default")
+        name2=request.POST.get("search2","default")
+        name1=str(name1).upper()
+        name2=str(name2).upper()
+        if name1=="" or name2=="":
+            return render(request,'compare.html',{"message":"*Fill the Full Form"})
+        else:
+            try:
+                data1=dt.DataReader(name1,data_source="yahoo")
+                data2=dt.DataReader(name2,data_source="yahoo")
+            except:
+                return render(request,"compare.html",{"message":"*We deal with BSE and NSE stock so please fill accordingly"})
+        return HttpResponseRedirect(f"/compare/{name1}vs{name2}")
+    return render(request,"compare.html",{"message":""})
+
+@login_required(login_url="/login")
+def compare_details(request,name1,name2):
+    details=compare(name1,name2)
+    details["Name1"]=name1
+    details["Name2"]=name2
+    return render(request,"compare_details.html",details)
+

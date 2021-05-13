@@ -10,5 +10,6 @@ urlpatterns = [
     path('logout/',views.signoff,name="Logout"),
     path('details/',views.details,name="Details"),
     path('details/<str:name>',views.details_single_wise,name="Single"),
-    path('compare/',views.compare_input,name="Compare_input")
+    path('compare/',views.compare_input,name="Compare_input"),
+    path("compare/<str:name1>vs<str:name2>",views.compare_details,name="Compare_Details")
 ]

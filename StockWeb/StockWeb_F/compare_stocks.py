@@ -5,11 +5,11 @@ import io
 import base64
 import urllib
 import matplotlib.pyplot as plt
-from Security_return import simple_return
-from Log_Return import log_return
-from montecarlo_forcast_stock_price import monte_forcast
-from Beta import beta
-from Prediction import prediction
+from .Security_return import simple_return
+from .Log_Return import log_return
+from .montecarlo_forcast_stock_price import monte_forcast
+from .Beta import beta
+from .Prediction import prediction
 def compare(company1,company2):
     dicty={}
     # company1
@@ -30,16 +30,16 @@ def compare(company1,company2):
     string=base64.b64encode(buf.read())
     growth_plot_cp1=urllib.parse.quote(string)
     dicty["Growth_Plot_Cp1"]=growth_plot_cp1
-    dicty["Simple_return_Cp1"]=round(sr["Overall_Mean"],3)
+    dicty["Simple_return_Cp1"]=sr["Overall_Mean"]
     dicty["Simple_return_plot_Cp1"]=sr["Plot"]
-    dicty["Log_return_Cp1"]=round(lr["Overall_Mean"],3)
+    dicty["Log_return_Cp1"]=lr["Overall_Mean"]
     dicty["Log_return_Plot_Cp1"]=lr["Plot"]
     dicty["Var_Cp1"]=mcarlo["Variance_return"]
     dicty["Std_Cp1"]=mcarlo["Std_deviation"]
     dicty["Drift_Cp1"]=mcarlo["Drift"]
     dicty["Norm_Cp1"]=mcarlo["Norm"]
     dicty["Future_Iteration_Cp1"]=mcarlo['plot']
-    dicty["Beta_Cp1"]=beta_value['Beta']
+    dicty["Beta_Cp1"]=(beta_value['Beta'])
     dicty["Cov_mrkt_wrt_stk_Cp1"]=beta_value['Cov Market wrt Stock']
     dicty["Variance_Market_Cp1"]=beta_value["Var Market"]
     dicty["Volatility_Cp1"]=beta_value["Volatility_of_stock"]
@@ -76,4 +76,4 @@ def compare(company1,company2):
     dicty["Variance_Market_Cp2"]=beta_value["Var Market"]
     dicty["Volatility_Cp2"]=beta_value["Volatility_of_stock"]
     dicty["Future_Pred_Cp2"]=prd["Plot2"]
-compare("RELIANCE.NS","TCS.NS")
+    return dicty
