@@ -11,7 +11,7 @@ def beta(name):
         l=[]
     my_data = pd.DataFrame()
     for i in l:
-        my_data[i] = dt.DataReader(i, data_source="yahoo", start="2010-1-1")["Adj Close"]
+        my_data[i] = dt.DataReader(i, data_source="yahoo")["Adj Close"]
     log_return = np.log(my_data / my_data.shift(1))
     cov_market = (log_return.cov() * 250).iloc[0, 1]
     Market_Covariance=(cov_market)
