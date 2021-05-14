@@ -10,6 +10,8 @@ def port_return(company,weightage):
     for i in company:
         dataframe[i]=dt.DataReader(i,data_source="yahoo",start="2010-1-1")["Adj Close"]
     normal_100=(dataframe/dataframe.iloc[0])*100
+    plt.figure(11)
+    plt.clf()
     plt.title("Normal 100")
     for i in company:
         plt.plot(normal_100[i],label=i)
@@ -24,5 +26,4 @@ def port_return(company,weightage):
     simple_return=(dataframe/dataframe.shift(1))-1
     port_return=np.dot(simple_return,weights)*100
     annual_return=simple_return.mean()*250
-    print({"Annual_Return":annual_return,"Portfolio_return":port_return,"Normal_100_plot":uri})
-port_return(["RELIANCE.NS","TCS.NS"],[0.5,0.5])
+    return {"Normal_100_plot":uri}

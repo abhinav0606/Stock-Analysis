@@ -9,9 +9,6 @@ from .models import Register
 from django.contrib.auth import authenticate
 from .sendmail import send
 from pandas_datareader import data as dt
-import matplotlib.pyplot as plt
-import io
-import urllib,base64
 from .Recommendation_Box import bse_nse
 from .Security_return import simple_return
 from .Log_Return import log_return
@@ -20,6 +17,8 @@ from .Prediction import prediction
 from .monte_carlo_derivative import montecarlo_derivative
 from .montecarlo_forcast_stock_price import monte_forcast
 from .compare_stocks import compare
+from .Covariance_Correlation import cov_corr
+from .Portfolio_Return import port_return
 @login_required(login_url="/login")
 def main(request):
     if str(request.user)=="StocksW":
@@ -284,3 +283,43 @@ def compare_details(request,name1,name2):
     details["Name2"]=name2
     return render(request,"compare_details.html",details)
 
+@login_required(login_url="/login")
+def portfolio_creation(request):
+    return render(request,"port_search.html",{"message":""})
+
+@login_required(login_url="/login")
+def portfolio_details(request):
+    if request.method=="POST":
+        stock=[]
+        weight=[]
+        i=1
+        while True:
+            x="Stock"+str(i)
+            y="Weight"+str(i)
+            s=request.POST.get(x,"default")
+            w=request.POST.get(y,"default")
+            if str(s)!="" and str(w)=="":
+                return render(request,"port_search.html",{"message":"Something is Missing!"})
+            if str(s)=="" and str(w)!="":
+                return render(request,"port_search.html",{"message":"Something is Missing!"})
+            if str(s)=="default" and str(w)=="default":
+                   break
+            try:
+                q=int(w)
+            except:
+                return render(request,"port_search.html",{"message":"Weight Value must be a number"})
+            stock.append(str(s).upper())
+            weight.append(int(w))
+            i=i+1
+        weight_updated=[]
+        for i in weight:
+            weight_updated.append(i/sum(weight))
+        re={}
+        try:
+            cov_corr_port=cov_corr(stock,weight_updated)
+            porto=port_return(stock,weight_updated)
+            cov_corr_port["Normal_100_plot"]=porto["Normal_100_plot"]
+        except:
+            return render(request,"port_search.html",{"message":"*We deal with BSE and NSE stock so please fill Accordingly"})
+        return render(request,"portfolio_details.html",cov_corr_port)
+    return render(request,"port_search.html",{"message":""})
