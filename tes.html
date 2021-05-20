@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+</head>
+<body>
+<p id="res"></p>
+<script>
+var n= parseInt(prompt("Enter the number"))
+function sumPrimes(num) {
+  let i = 1;
+  let sum = 0;
+  let count=0
+  while (1) {
+    if (isPrime(i)) {
+      sum += i;
+      count=count+1;
+    }
+    if (count==num){
+    break;
+    }
+    i++;
+  }
+  return sum
+<!--document.getElementById("res").innerHTML = sum(parseInt(document.getElementById("number"))));-->
+}
+//function to check if a number is prime or not
+function isPrime(x) {
+  for (let i = 2; i < x; i++) {
+    if (x % i === 0) return false;
+  }
+  return x !== 1 && x !== 0;
+}
+//test here
+document.getElementById("res").innerHTML=sumPrimes(n)
+</script>
+</body>
+</html>
